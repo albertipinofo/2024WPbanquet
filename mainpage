@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>座位查詢系統</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    #container {
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    #result {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div id="container">
+    <h2>輸入編號查詢座位</h2>
+    <form id="searchForm">
+        <input type="text" id="inputNumber" placeholder="請輸入編號">
+        <input type="submit" value="查詢">
+    </form>
+    <div id="result"></div>
+</div>
+
+<script>
+    // 假設這是你的座位與使用者的資料
+    const seatData = [
+        { number: "001", name: "張三" },
+        { number: "002", name: "李四" },
+        { number: "003", name: "王五" },
+        { number: "004", name: "趙六" }
+    ];
+
+    // 查詢函式
+    function searchSeat(number) {
+        const seat = seatData.find(seat => seat.number === number);
+        return seat ? seat.name : "找不到該編號的座位";
+    }
+
+    // 監聽表單提交事件
+    document.getElementById("searchForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // 阻止表單提交
+        const inputNumber = document.getElementById("inputNumber").value.trim();
+        const result = document.getElementById("result");
+        result.textContent = searchSeat(inputNumber);
+    });
+</script>
+
+</body>
+</html>
